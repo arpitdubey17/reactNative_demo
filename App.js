@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from "react-navigation";
+import{createStackNavigator} from "react-navigation-stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import orderList from './orders/orderList.js';
+import orderDetails from './orders/orderDetails.js';
+
+
+const MyStack = createStackNavigator(
+  {
+    Orders : {
+      screen: orderList
+    },
+    orderDetails : {
+      screen: orderDetails
+    }
+},
+  {
+    intialRouteName: "Home",
+    defaultNavigationOptions:{
+      title: "Orders"
+    }
+  }
+
+);
+
+// const MyStack = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="Orders"
+//           component={OrderScreen}
+//           options={{title: 'Check Orders'}}
+//         />
+//         <Stack.Screen name="orderDetails" component={OrderDetails} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+
+export default createAppContainer(MyStack);
